@@ -1,12 +1,11 @@
-
+import TodoComponent from "./components/TodoComponent";
 
 const App = () => {
-
   return (
-    <div>
-      <h1 className='text-4xl'>Hello world</h1>
+    <div className="main-layout">
+      <TodoComponent />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
