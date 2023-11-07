@@ -5,11 +5,30 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import TodoListComponent from "./TodoListComponent";
+import useTodo from "../hooks/useTodo";
+import idGenerator from "../helper/idGenerator";
 
 const TodoComponent = () => {
   const [show, setShow] = useState(false);
+  const [todoText, setTodoText] = useState(null);
+
+  const { addTodo, deleteMultipleTodos, undoDelete } = useTodo();
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleAddTodo = () => {
+    if (todoText === null || todoText === "") {
+      alert("Please type something to add");
+      return;
+    }
+    addTodo({
+      id: idGenerator(),
+      text: todoText,
+    });
+    setTodoText(null);
+    handleClose();
+  };
 
   return (
     <>
@@ -24,10 +43,10 @@ const TodoComponent = () => {
         <TodoListComponent />
         <div className="todo-actions">
           <div className="left-actions">
-            <Button variant="outline-primary" className="todo-action-button">
+            <Button variant="outline-primary" className="todo-action-button" onClick={undoDelete}>
               <CircumIcon name="undo" />
             </Button>
-            <Button variant="outline-primary" className="todo-action-button">
+            <Button variant="outline-primary" className="todo-action-button" onClick={deleteMultipleTodos} >
               DELETE
             </Button>
           </div>
@@ -46,7 +65,12 @@ const TodoComponent = () => {
           <p>Add item to list</p>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Control type="text" placeholder="Type the text here..." />
+              <Form.Control
+                type="text"
+                placeholder="Type the text here..."
+                value={todoText}
+                onChange={(e) => setTodoText(e.target.value)}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -54,7 +78,7 @@ const TodoComponent = () => {
           <Button
             variant="primary"
             className="todo-action-button button-size-fixed"
-            onClick={handleClose}
+            onClick={handleAddTodo}
           >
             ADD
           </Button>

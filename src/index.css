@@ -89,3 +89,12 @@ body {
   width: 100px;
   height: 40px;
 }
+
+.selected {
+  background-color: #324BFF;
+  color: #fff;
+}
+
+.full-w {
+  width: 100%;
+}
