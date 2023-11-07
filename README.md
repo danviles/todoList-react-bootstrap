@@ -11,6 +11,7 @@ Una aplicación web construida con React (JavaScript) que permite agregar, elimi
 La aplicación integra diversas tecnologías, dependencias como:
 
 - [Bootstrap](https://tailwindcss.com/): Para el diseño y la implementación de la interfaz de usuario.
+- [Context API](https://reactjs.org/docs/context.html): Para el manejo del estado global de la aplicación.
 
 ## Instalación
 
